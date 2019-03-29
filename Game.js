@@ -21,6 +21,10 @@ class Game {
     }
 
     restart() {
+        /**
+         * Estado padrao do jogo, 2 representam peças pretas, 1 representa peças vermelhas e 0
+         * representa espaços sem nenhuma peça.
+         */
         this.state = [
             [0, 2, 0, 2, 0, 2, 0, 2], 
             [2, 0, 2, 0, 2, 0, 2, 0],
