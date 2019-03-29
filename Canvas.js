@@ -49,8 +49,6 @@ class Canvas {
             for(let c = 0; c < y; c++) {
                 const piece = table[c][r];
 
-                this.context.beginPath();
-                this.context.arc((r * squareWidth) + (squareWidth/2), (c * squareHeight) + (squareHeight/2), squareWidth/2 - 10, 0, 2 * Math.PI);
                 
                 if(piece == RED) {
                     this.context.fillStyle = 'rgb(219, 23, 13)';
@@ -59,7 +57,9 @@ class Canvas {
                 } else {
                     continue;
                 }
-
+                
+                this.context.beginPath();
+                this.context.arc((r * squareWidth) + (squareWidth/2), (c * squareHeight) + (squareHeight/2), squareWidth/2 - 10, 0, 2 * Math.PI);
                 this.context.fill();
             }
         }
