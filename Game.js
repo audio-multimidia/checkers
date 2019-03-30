@@ -6,7 +6,7 @@ class Game {
         this.EMPTY = 0;
         
         this.currentTurn = this.RED;
-
+        this.canSelect = [];
         this.restart();
     }
     
@@ -43,11 +43,24 @@ class Game {
     move (x0, y0, x, y) {
         if (this.isInvalidMove(x0, y0, x, y))
             return
-    
+        
+        const hasEatten = this.hasEatten(x0, y0, x, y);
+        
         let aux = this.state[y0][x0]
         this.state[y0][x0] = this.state[y][x]
         this.state[y][x] = aux;
-        this.passTurn();
+        
+        const canEatAfterMove = this.possibleNextPositions(x, y).find((pos) => { return pos.eat });
+
+        if(!(hasEatten && canEatAfterMove)) {
+            this.passTurn();
+        }
+    }
+
+    hasEatten(x0, y0, x, y) {
+        const possibleNextPos = this.possibleNextPositions(x0, y0, true);
+        const nextPos = possibleNextPos.find((pos) => { return pos.x == x && pos.y == y });
+        return nextPos.eat;
     }
     
     /**
@@ -89,7 +102,10 @@ class Game {
                 return ({ x: x + 2 * rMod, y: y + 2 * cMod, eat: true });
             }
         })
+        
         return nextPositions.filter(pos => pos && (!hasEat || pos.eat));
+
+        // return nextPositions;
     }
 
 
