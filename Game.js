@@ -44,16 +44,28 @@ class Game {
             return
         
         const hasEatten = this.hasEatten(x0, y0, x, y);
+
         
         let aux = this.state[y0][x0]
         this.state[y0][x0] = this.state[y][x]
         this.state[y][x] = aux;
         
+        if (hasEatten) {
+            this.eatPiece(x0, y0, x, y)
+        }
         const canEatAfterMove = this.possibleNextPositions(x, y).find((pos) => { return pos.eat });
 
         if(!(hasEatten && canEatAfterMove)) {
             this.passTurn();
         }
+    }
+
+    eatPiece(x0, y0, x, y) {
+        let diffY = y - y0
+        let diffX = x - x0
+        diffX > 0 ? diffX -= 1 : diffX += 1
+        diffY > 0 ? diffY -= 1 : diffY += 1
+        this.state[diffY + y0][diffX + x0] = 0
     }
 
     hasEatten(x0, y0, x, y) {
