@@ -21,6 +21,9 @@ class Game {
     }
 
     getPositionValue (x, y) {
+        if (x < 0 || y < 0 || y >= this.state.length || x >= this.state[0].length)
+            return
+
         return this.state[y][x]
     }
 
