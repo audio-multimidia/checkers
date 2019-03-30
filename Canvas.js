@@ -81,6 +81,11 @@ class Canvas {
         }
     }
 
+    /**
+     * Desenha os anéis que representam as posições possíveis que a peça pode se movimentar.
+     * @param {Number} x 
+     * @param {Number} y 
+     */
     drawRing(x, y) {
         const { squareWidth, squareHeight } = this.config;
 
@@ -90,6 +95,11 @@ class Canvas {
         this.context.stroke();
     }
 
+    /**
+     * Se tem peça selecionada e clicou em uma posicao vazia, movimenta a peça
+     * Se nao tem peça selecionada, seleciona a peça.
+     * @param {MouseClickEvent} event 
+     */
     selectMovePiece(event) {
         const x = Math.floor(event.offsetX / this.config.squareWidth);
         const y = Math.floor(event.offsetY / this.config.squareHeight);
@@ -103,6 +113,11 @@ class Canvas {
         this.draw()
     }
 
+    /**
+     * Seleciona uma peça de uma certa posiçao
+     * @param {Number} x 
+     * @param {Number} y 
+     */
     setSelectedPiece(x, y) {
         //Se o turno atual não corresponde a peça clicada, não selecioná-la
         if(this.game.currentTurn !== this.game.getPositionValue(x, y)) {
@@ -112,6 +127,9 @@ class Canvas {
         this.selectedPiece = { x, y };
     }
 
+    /**
+     * Apaga todo o canvas
+     */
     clean () {
         this.context.clearRect(0, 0, canvas.width, canvas.height);
     }

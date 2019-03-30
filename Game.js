@@ -33,6 +33,13 @@ class Game {
         return this.state[y][x]
     }
 
+    /**
+     * Move uma peça
+     * @param {Float} x0 posicao X inicial
+     * @param {Number} y0 posicao Y inicial
+     * @param {Number} x posicao X final
+     * @param {Number} y posicao Y final
+     */
     move (x0, y0, x, y) {
         if (this.isInvalidMove(x0, y0, x, y))
             return
@@ -43,6 +50,13 @@ class Game {
         this.passTurn();
     }
     
+    /**
+     * Checa se o movimento requerido é inválido
+     * @param {Number} x0 
+     * @param {Number} y0 
+     * @param {Number} x 
+     * @param {Number} y 
+     */
     isInvalidMove(x0, y0, x, y) {
         const isNotEmpty = (this.state[y][x] != 0);
         
@@ -53,6 +67,11 @@ class Game {
         return isNotEmpty || !isPossibleNextPosition;
     }
 
+    /**
+     * Checa as possíveis próximas posições da peça selecionada
+     * @param {Number} x 
+     * @param {Number} y 
+     */
     possibleNextPositions (x, y) {
         const piece = this.getPositionValue(x, y);
         let hasEat = false;
