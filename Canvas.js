@@ -47,9 +47,8 @@ class Canvas {
      * Renderiza as peças, baseado no estado do jogo definido em Game.js
      */
     renderPieces() {
-        const table = this.game.getState();
-        const { RED, BLACK } = this.game.getEnumerators();
-        const {x, y, squareWidth, squareHeight} = this.config;
+        const { RED  } = this.game.getEnumerators();
+        const { x, y } = this.config;
 
         for(let r = 0; r < x; r++) {
             for(let c = 0; c < y; c++) {
