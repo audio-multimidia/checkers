@@ -2,8 +2,7 @@ class Input {
 
     constructor(){}
 
-    onclick() {
-
+    onclick(event) {
     }
 
     /**
