@@ -49,12 +49,7 @@ class Game {
 
         if (hasEatten) {
             this.eatPiece(x0, y0, x, y)
-            if (this.blackCount == 0) {
-                alert('JOGADOR 1 VENCEU')
-            }
-            if (this.redCount == 0) {
-                alert('JOGADOR 2 VENCEU')
-            }
+            this.verifyEnd()
         }
         
         let aux = this.state[y0][x0]
@@ -65,6 +60,16 @@ class Game {
 
         if(!(hasEatten && canEatAfterMove)) {
             this.passTurn();
+        }
+    }
+
+
+    verifyEnd = () => {
+        if (this.blackCount == 0) {
+            alert('JOGADOR 1 VENCEU')
+        }
+        else if (this.redCount == 0) {
+            alert('JOGADOR 2 VENCEU')
         }
     }
 
