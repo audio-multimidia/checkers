@@ -15,6 +15,6 @@ const canvasObj = new Canvas(canvas, game, gameConfig);
 
 canvasObj.renderTable();
 canvasObj.draw();
-input.applyEventHandlers();
+canvasObj.addEventListeners();
 
 
