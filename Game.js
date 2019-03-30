@@ -4,6 +4,8 @@ class Game {
         this.RED = 1;
         this.BLACK = 2;
         this.EMPTY = 0;
+        this.redCount = 12;
+        this.blackCount = 12;
         
         this.currentTurn = this.RED;
         this.restart();
@@ -45,14 +47,20 @@ class Game {
         
         const hasEatten = this.hasEatten(x0, y0, x, y);
 
+        if (hasEatten) {
+            this.eatPiece(x0, y0, x, y)
+            if (this.blackCount == 0) {
+                alert('JOGADOR 1 VENCEU')
+            }
+            if (this.redCount == 0) {
+                alert('JOGADOR 2 VENCEU')
+            }
+        }
         
         let aux = this.state[y0][x0]
         this.state[y0][x0] = this.state[y][x]
         this.state[y][x] = aux;
         
-        if (hasEatten) {
-            this.eatPiece(x0, y0, x, y)
-        }
         const canEatAfterMove = this.possibleNextPositions(x, y).find((pos) => { return pos.eat });
 
         if(!(hasEatten && canEatAfterMove)) {
@@ -65,6 +73,8 @@ class Game {
         let diffX = x - x0
         diffX > 0 ? diffX -= 1 : diffX += 1
         diffY > 0 ? diffY -= 1 : diffY += 1
+        let piece = this.getPositionValue(x0, y0)
+        piece == 1 ? this.blackCount -= 1 : this.redCount -= 1
         this.state[diffY + y0][diffX + x0] = 0
     }
 
