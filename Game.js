@@ -6,7 +6,6 @@ class Game {
         this.EMPTY = 0;
         
         this.currentTurn = this.RED;
-        this.canSelect = [];
         this.restart();
     }
     
