@@ -90,22 +90,25 @@ class Canvas {
         this.context.stroke();
     }
 
-    addEventListeners() {
-        this.canvas.addEventListener('mousedown', (event) => {
-            const x = Math.floor(event.offsetX / this.config.squareWidth);
-            const y = Math.floor(event.offsetY / this.config.squareHeight);
-            
-            const hasPieceSelected = this.selectedPiece.x !== -1 && this.selectedPiece.y != -1;
-            if (hasPieceSelected && this.game.getPositionValue(x, y) == 0) {
-                this.game.move(this.selectedPiece.x, this.selectedPiece.y, x, y)
-            }
+    selectMovePiece(event) {
+        const x = Math.floor(event.offsetX / this.config.squareWidth);
+        const y = Math.floor(event.offsetY / this.config.squareHeight);
+        
+        const hasPieceSelected = this.selectedPiece.x !== -1 && this.selectedPiece.y != -1;
+        if (hasPieceSelected && this.game.getPositionValue(x, y) == 0) {
+            this.game.move(this.selectedPiece.x, this.selectedPiece.y, x, y)
+        }
 
-            this.setSelectedPiece(x, y)
-            this.draw()
-        });
+        this.setSelectedPiece(x, y)
+        this.draw()
     }
 
     setSelectedPiece(x, y) {
+        //Se o turno atual não corresponde a peça clicada, não selecioná-la
+        if(this.game.currentTurn !== this.game.getPositionValue(x, y)) {
+            return;
+        }
+
         this.selectedPiece = { x, y };
     }
 

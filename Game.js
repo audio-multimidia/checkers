@@ -4,6 +4,8 @@ class Game {
         this.RED = 1;
         this.BLACK = 2;
         this.EMPTY = 0;
+        
+        this.currentTurn = this.RED;
 
         this.restart();
     }
@@ -20,6 +22,10 @@ class Game {
         }
     }
 
+    passTurn() {
+        this.currentTurn = this.currentTurn === this.RED ? this.BLACK : this.RED;
+    }
+
     getPositionValue (x, y) {
         if (x < 0 || y < 0 || y >= this.state.length || x >= this.state[0].length)
             return
@@ -34,6 +40,7 @@ class Game {
         let aux = this.state[y0][x0]
         this.state[y0][x0] = this.state[y][x]
         this.state[y][x] = aux;
+        this.passTurn();
     }
     
     isInvalidMove(x0, y0, x, y) {
@@ -51,6 +58,8 @@ class Game {
         let hasEat = false;
         const cMod = piece == this.BLACK ? 1 : -1;
 
+        //O código abaixo lida com o cálculo para perceber: se tem como comer alguma peça, 
+        //é obrigatorio ao jogador comer aquela peça (ele nao pode ir pra outra posicao possivel)
         let nextPositions = [-1, +1].map(rMod => {
             let curr = this.getPositionValue(x + rMod, y + cMod);
             if (curr === 0) {
