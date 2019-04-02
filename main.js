@@ -15,6 +15,7 @@ const input = new Input(canvasObj);
 
 canvasObj.renderTable();
 canvasObj.draw();
+// canvasObj.isKing();
 input.applyEventHandlers();
 
 

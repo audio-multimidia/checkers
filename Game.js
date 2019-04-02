@@ -9,7 +9,7 @@ class Game {
         
         this.currentTurn = this.RED;
         this.restart();
-    }
+    }    
     
     getState() {
         return this.state;
@@ -49,17 +49,38 @@ class Game {
 
         if (hasEatten) {
             this.eatPiece(x0, y0, x, y)
-            this.verifyEnd()
+            this.verifyEnd();            
         }
-        
+
         let aux = this.state[y0][x0]
         this.state[y0][x0] = this.state[y][x]
         this.state[y][x] = aux;
         
         const canEatAfterMove = this.possibleNextPositions(x, y).find((pos) => { return pos.eat });
 
+        this.isKing();
+
         if(!(hasEatten && canEatAfterMove)) {
             this.passTurn();
+        }
+    }
+
+    // checa se foi obtida dama depois de cada jogada
+    isKing() {      
+        // checa dama vermelha  
+        let a = 0;
+        for (let x = 0; x < 8; x++ ){
+            if (this.state[a][x] == 1){
+                alert("RED KING!!!");
+            }
+        }
+
+        // checa dama preta
+        let b = 7;
+        for (let x = 0;x < 8;x++){
+            if (this.state[7][x] == 2){
+                alert("BLACK KING!!!");
+            }
         }
     }
 
@@ -132,9 +153,8 @@ class Game {
         return nextPositions.filter(pos => pos && (!hasEat || pos.eat));
 
         // return nextPositions;
-    }
-
-
+    }   
+    
     restart() {
         /**
          * Estado padrao do jogo, 2 representam peças pretas, 1 representa peças vermelhas e 0

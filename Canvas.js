@@ -7,12 +7,13 @@ class Canvas {
         this.config = config;
         this.selectedPiece = { x: -1, y: -1 }
         this.renderPieces = this.renderPieces.bind(this);
+        this.isKing
     }
 
     draw () {
         this.clean();
         this.renderTable();
-        this.renderPieces();
+        this.renderPieces();        
     }
 
     /**
@@ -79,6 +80,7 @@ class Canvas {
             }
         }
     }
+   
 
     /**
      * Desenha os anéis que representam as posições possíveis que a peça pode se movimentar.
