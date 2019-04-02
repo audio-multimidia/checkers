@@ -49,6 +49,9 @@ class Canvas {
      */
     renderPieces() {
         const { RED  } = this.game.getEnumerators();
+        const { BLACK  } = this.game.getEnumerators();
+        const { REDKING  } = this.game.getEnumerators();
+        const { BLACKKING  } = this.game.getEnumerators();
         const { x, y } = this.config;
 
         for(let r = 0; r < x; r++) {
@@ -58,11 +61,15 @@ class Canvas {
                 this.context.lineWidth = 1;
                 this.context.strokeStyle = 'black'
                 
-                if (piece != 0) {
+                if (piece != 0) {                    
                     if (piece === RED) {
                         this.context.fillStyle = 'rgb(219, 23, 13)';
-                    } else {
+                    } else if(piece === BLACK) {
                         this.context.fillStyle = 'rgb(25, 12, 11)';
+                    } else if (piece === BLACKKING){
+                        this.context.fillStyle = 'rgb(105,105,105)';
+                    } else if (piece === REDKING){
+                        this.context.fillStyle = 'rgb(205, 92, 92)';
                     }
 
                     if (r === this.selectedPiece.x && c == this.selectedPiece.y) {

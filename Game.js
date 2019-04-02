@@ -3,9 +3,15 @@ class Game {
         
         this.RED = 1;
         this.BLACK = 2;
+        this.REDKING = 11;
+        this.BLACKKING = 22;
         this.EMPTY = 0;
+
         this.redCount = 12;
         this.blackCount = 12;
+
+        this.redKingCount = 0;
+        this.blackKingCount = 0;
         
         this.currentTurn = this.RED;
         this.restart();
@@ -19,6 +25,8 @@ class Game {
         return {
             RED: this.RED,
             BLACK: this.BLACK,
+            REDKING: this.REDKING,
+            BLACKKING: this.BLACKKING,
             EMPTY: this.EMPTY
         }
     }
@@ -67,21 +75,40 @@ class Game {
 
     // checa se foi obtida dama depois de cada jogada
     isKing() {      
+        
         // checa dama vermelha  
+        let redCT = 0;
         let a = 0;
         for (let x = 0; x < 8; x++ ){
-            if (this.state[a][x] == 1){
-                alert("RED KING!!!");
+            if (this.state[a][x] == 1){                
+                this.state[a][x] = 11;
+                redCT++;
             }
         }
 
+        redCT += this.redKingCount;
+
+        if (redCT > this.redKingCount){
+            alert("RED KING!!!");
+            this.redKingCount = redCT;
+        }       
+
         // checa dama preta
+        let blackCT = 0;
         let b = 7;
         for (let x = 0;x < 8;x++){
-            if (this.state[7][x] == 2){
-                alert("BLACK KING!!!");
+            if (this.state[7][x] == 2){                
+                this.state[b][x] = 22; 
+                blackCT++;                
             }
         }
+
+        blackCT += this.blackKingCount;
+
+        if (blackCT > this.blackKingCount){
+            alert("BLACK KING!!!");
+            this.blackKingCount = this.blackCount;
+        }        
     }
 
 
@@ -169,6 +196,6 @@ class Game {
             [1, 0, 1, 0, 1, 0, 1, 0],
             [0, 1, 0, 1, 0, 1, 0, 1],
             [1, 0, 1, 0, 1, 0, 1, 0]
-        ]
+        ]        
     }
 }
